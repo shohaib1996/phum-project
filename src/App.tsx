@@ -1,12 +1,12 @@
-import Mainlayout from "./components/layout/Mainlayout"
-
+import Mainlayout from "./components/layout/Mainlayout";
+import ProtectedRoute from "./components/layout/ProtectedRoute";
 
 function App() {
- 
-
   return (
-   <Mainlayout></Mainlayout>
-  )
+    <ProtectedRoute>
+      <Mainlayout />
+    </ProtectedRoute>
+  );
 }
 
-export default App
+export default App;

@@ -1,8 +1,10 @@
-import { Layout, Menu } from "antd";
-const { Header, Content, Footer, Sider } = Layout;
+import { Button, Layout } from "antd";
+const { Header, Content } = Layout;
 
 import { Outlet } from "react-router-dom";
-import { adminSideBar } from "../../routes/admin.routes";
+import Sidebar from "./Sidebar";
+import { useAppDispatch } from "../../redux/hooks";
+import { logout } from "../../redux/features/auth/authSlice";
 
 // const items: MenuProps['items'] = [
 //     {
@@ -32,41 +34,18 @@ import { adminSideBar } from "../../routes/admin.routes";
 // ]
 
 const Mainlayout = () => {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <Layout style={{ height: "100vh" }}>
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-      >
-        <div
-          style={{
-            color: "white",
-            textAlign: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "4rem",
-            fontSize: "20px",
-            fontWeight: "bold",
-          }}
-        >
-          PH Logo
-        </div>
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["4"]}
-          items={adminSideBar}
-        />
-      </Sider>
+      <Sidebar />
       <Layout>
-        <Header style={{ padding: 0 }} />
+        <Header>
+          <Button onClick={handleLogout}>Logout</Button>{" "}
+        </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
@@ -74,12 +53,9 @@ const Mainlayout = () => {
               minHeight: 360,
             }}
           >
-            <Outlet></Outlet>
+            <Outlet />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
-        </Footer>
       </Layout>
     </Layout>
   );
