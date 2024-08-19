@@ -2,9 +2,10 @@ import { Button, Layout } from "antd";
 const { Header, Content } = Layout;
 
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
+
 import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
+import Sidebar from "./Sidebar";
 
 // const items: MenuProps['items'] = [
 //     {
